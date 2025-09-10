@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { auth0 } from '../../../lib/auth0';
+import { auth0 } from '@/app/lib/auth0';
+import { NextResponse } from 'next/server';
 
-export const GET = async function client2() {
+export const GET = async function shows() {
   try {
     const session = await auth0.getSession();
 
@@ -11,25 +11,22 @@ export const GET = async function client2() {
         { status: 401 }
       );
     }
-    const endpoint = 'asd'
 
     const res = new NextResponse();
     const { token: accessToken } = await auth0.getAccessToken();
-    const apiPort = 5138
-    const response = await fetch(`http://localhost:${apiPort}/api/${endpoint}`, {
+
+    console.log(accessToken)
+    const apiPort = 5138;
+    const response = await fetch(`http://localhost:${apiPort}/api/test/test-auth`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     });
-
-    console.log("Call from client 2")
-
     const shows = await response.json();
 
     return NextResponse.json(shows, res);
   } catch (error) {
-    console.log("err Call from client 2")
-
-    return NextResponse.json({ error: error.message }, { status: error.status || 500 });
+    console.log(error)
+    return NextResponse.json({ err: "api call error" });
   }
 };
