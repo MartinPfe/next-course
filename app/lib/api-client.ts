@@ -1,4 +1,4 @@
-import { auth0 } from './auth0';
+import { auth0 } from "./auth0";
 
 // Server-side function to get access token
 export async function GetToken(): Promise<string> {
@@ -90,11 +90,14 @@ export class DotNetApiClient {
   }
 }
 
-// Convenience function to create and configure API client
+// Convenience function to create and configure API client (client-side)
 export async function createDotNetApiClient(): Promise<DotNetApiClient> {
   const client = new DotNetApiClient();
-  const token = await getClientAccessToken();
-  await client.setAccessToken(token);
+  const token = await getClientAccessToken()
+  console.log("got token:", token)
+  if (token) {
+    await client.setAccessToken(token);
+  }
   return client;
 }
 

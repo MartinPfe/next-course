@@ -44,11 +44,10 @@ export async function manualApiClientUsage() {
 }
 
 // Example 4: Server-side usage (in API routes or server components)
-import { auth0 } from './auth0';
-
 export async function serverSideApiCall() {
   try {
-    // Get token server-side
+    // Get token server-side with dynamic import
+    const { auth0 } = await import('./auth0');
     const tokenData = await auth0.getAccessToken();
     
     // Create client and set token
