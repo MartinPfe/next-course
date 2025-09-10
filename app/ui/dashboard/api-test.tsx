@@ -51,16 +51,16 @@ export default function ApiTestComponent() {
       // Test 1: GET /weatherforecast
       const startTime = Date.now();
       try {
-        const response = await apiClient.get('/weatherforecast');
+        const response = await apiClient.get('/api/test/success');
         results.push({
-          endpoint: 'GET /weatherforecast',
+          endpoint: 'GET /api/test/success',
           success: true,
           response,
           duration: Date.now() - startTime
         });
       } catch (error) {
         results.push({
-          endpoint: 'GET /weatherforecast',
+          endpoint: 'GET /api/test/success',
           success: false,
           error: error instanceof Error ? error.message : 'Unknown error',
           duration: Date.now() - startTime
@@ -70,16 +70,16 @@ export default function ApiTestComponent() {
       // Test 2: GET /api/values (common .NET API endpoint)
       const startTime2 = Date.now();
       try {
-        const response = await apiClient.get('/api/values');
+        const response = await apiClient.get('/api/test/test-auth');
         results.push({
-          endpoint: 'GET /api/values',
+          endpoint: 'GET /api/test/test-auth',
           success: true,
           response,
           duration: Date.now() - startTime2
         });
       } catch (error) {
         results.push({
-          endpoint: 'GET /api/values',
+          endpoint: 'GET /api/test/test-auth',
           success: false,
           error: error instanceof Error ? error.message : 'Unknown error',
           duration: Date.now() - startTime2
