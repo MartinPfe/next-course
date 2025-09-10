@@ -30,3 +30,39 @@ export const GET = async function shows() {
     return NextResponse.json({ err: "api call error" });
   }
 };
+
+
+export async function POST() {
+  try {
+    const session = await auth0.getSession();
+
+    console.log("Calling POST")
+    if (!session) {
+      return NextResponse.json(
+        { error: 'Not authenticated' },
+        { status: 401 }
+      );
+    }
+
+    const res = new NextResponse();
+    const { token: accessToken } = await auth0.getAccessToken();
+
+    const apiPort = 5138;
+    const response = await fetch(`http://localhost:${apiPort}/api/test/test-auth-post`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      },
+      method: "POST"
+    });
+    
+    console.log(response)
+    
+    return NextResponse.json({}, res);
+  } catch (error) {
+    console.error('Error getting access token:', error);
+    return NextResponse.json(
+      { error: 'Failed to get access token' },
+      { status: 500 }
+    );
+  }
+}

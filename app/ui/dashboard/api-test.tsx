@@ -4,6 +4,7 @@ import { createDotNetApiClient, getClientAccessToken } from '@/app/lib/api-clien
 import { useState, useEffect } from 'react';
 import { Button } from '../button';
 import Loading from '@/app/dashboard/(overview)/loading';
+import { POST } from '@/app/api/auth/access-token/route';
 
 interface TestResult {
   endpoint: string;
@@ -20,7 +21,7 @@ export default function ApiTestComponent()  {
     setState(previous => ({ ...previous, isLoading: true }));
 
     try {
-      const response = await fetch('/api/shows');
+      const response = await fetch('/api/shows', {method: 'POST'});
       const data = await response.json();
 
       setState(previous => ({ ...previous, response: data, error: undefined }));
