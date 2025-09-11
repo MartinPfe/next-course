@@ -19,6 +19,8 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'Sentry', href: '/sentry-example-page', icon: UserGroupIcon },
+  
 ];
 
 export default function NavLinks() {
